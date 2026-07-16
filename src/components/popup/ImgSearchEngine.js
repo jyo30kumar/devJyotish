@@ -50,7 +50,7 @@ const ImgSearchEngine = ({ open, close }) => {
                     <li>
                       Implemented keyword-based search with real-time results.
                     </li>
-                    <li>Added a "Load More" feature using pagination.</li>
+                    <li>Added a Load More feature using pagination.</li>
                     <li>
                       Optimized API requests and handled loading/error states.
                     </li>
