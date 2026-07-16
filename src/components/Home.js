@@ -1,0 +1,165 @@
+import parse from "html-react-parser";
+import { useContext, useEffect, useState } from "react";
+import { fatchData } from "../utilits";
+import { SiExpress, SiMongodb } from "react-icons/si";
+import { RiReactjsFill } from "react-icons/ri";
+import { IoLogoNodejs } from "react-icons/io5";
+import { BsWordpress } from "react-icons/bs";
+import AppContext from "./AppContext";
+
+const Home = ({ dark }) => {
+  const [data, setData] = useState({});
+  // const [mode, setMode] = useState("")
+  // const [toggle, setToggle] = useState(false)
+  const context = useContext(AppContext);
+  useEffect(async () => {
+    setData(await fatchData("/static/info.json"));
+  }, []);
+  const handleLight = () => {
+    // alert("Hello")
+    // localStorage.setItem("mode", "dark");
+    context.setMode("dark");
+    context.setToggle(!context.toggle);
+  };
+  const handleDark = () => {
+    // alert("Hello")
+    // localStorage.setItem("mode", "light");
+    context.setMode("light");
+    context.setToggle(!context.toggle);
+  };
+  // let item;
+  // useEffect(() => {
+  //   // Perform localStorage action
+  //    let item = localStorage.getItem('mode')
+  //    setMode(item)
+  // }, [context.toggle])
+
+  console.log("MODE", context.mode);
+
+  return (
+    <div className="dizme_tm_section" id="home">
+      <div className="modeDark">
+        {context.mode == "light" ? (
+          <diV className="lightMode" onClick={handleLight}>
+            <img src="/img/mode/light.png" alt="" />
+          </diV>
+        ) : (
+          <div onClick={handleDark}>
+            <img src="/img/mode/dark.png" alt="" />
+          </div>
+        )}
+      </div>
+      <div className="dizme_tm_hero">
+        <div
+          className="background"
+          data-img-url={`img/slider/${dark ? 2 : 1}.jpg`}
+          // style={{ backgroundImage: `img/slider/${dark ? 2 : 1}.jpg` }}
+        />
+
+        <div className="container">
+          <div className="content">
+            <div className="details">
+              <div className="hello">
+                <h3 className="orangeText">{`Hello, I am `}</h3>
+              </div>
+              <div className="name">
+                <h3>{`Professional`}</h3>
+              </div>
+              <div className="job">
+                <p>
+                  <span className="greenText">{`Developer with a Passion `}</span>{" "}
+                  for Crafting{" "}
+                  <span className="purpleText">{`Digital Solutions!`}</span>
+                </p>
+              </div>
+              <div className="text">{/* <p>{data.bio}</p> */}</div>
+              <div className="button">
+                <div className="dizme_tm_button">
+                  <a className="anchor" href="#about">
+                    <span>About Me</span>
+                  </a>
+                </div>
+                <div className="social"></div>
+              </div>
+            </div>
+            <div className="avatar">
+              <div className="image">
+                <img
+                  src={data && data.img ? data.img : "/img/slider/hero1.png"}
+                  alt="image"
+                />
+
+                <span className={`skills photoshop anim_moveBottom`}>
+                  <RiReactjsFill
+                    className="skillIcons"
+                    style={{ height: "25px", width: "25px" }}
+                  />
+                </span>
+
+                <span className={`skills mongo anim_moveBottom`}>
+                  <SiMongodb
+                    className="skillIcons"
+                    style={{ height: "25px", width: "25px" }}
+                  />
+                </span>
+
+                <span className={`skills nodejs anim_moveBottom`}>
+                  <IoLogoNodejs
+                    className="skillIcons"
+                    style={{ height: "25px", width: "25px" }}
+                  />
+                </span>
+
+                <span className={`skills wp anim_moveBottom`}>
+                  <BsWordpress
+                    className="skillIcons"
+                    style={{ height: "25px", width: "25px" }}
+                  />
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="dizme_tm_down">
+          <a className="anchor" href="#process">
+            <svg
+              width="26px"
+              height="100%"
+              viewBox="0 0 247 390"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              style={{
+                fillRule: "evenodd",
+                clipRule: "evenodd",
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                strokeMiterlimit: "1.5",
+              }}
+            >
+              <path
+                id="wheel"
+                d="M123.359,79.775l0,72.843"
+                style={{
+                  fill: "none",
+                  stroke: dark ? "#fff" : "#000",
+                  strokeWidth: 20,
+                }}
+              />
+              <path
+                id="mouse"
+                d="M236.717,123.359c0,-62.565 -50.794,-113.359 -113.358,-113.359c-62.565,0 -113.359,50.794 -113.359,113.359l0,143.237c0,62.565 50.794,113.359 113.359,113.359c62.564,0 113.358,-50.794 113.358,-113.359l0,-143.237Z"
+                style={{
+                  fill: "none",
+                  stroke: dark ? "#fff" : "#000",
+                  strokeWidth: 20,
+                }}
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default Home;
