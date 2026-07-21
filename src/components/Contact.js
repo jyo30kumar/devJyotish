@@ -35,7 +35,7 @@ const Contact = () => {
     } else {
       const response = await axios({
         method: "post",
-        url: "https://formspree.io/f/mzboynnq",
+        url: "https://formspree.io/f/xeeyzljo",
         data: {
           ...formObj,
         },
